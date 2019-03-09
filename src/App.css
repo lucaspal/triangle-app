@@ -1,1 +1,11 @@
 /* Custom custom css goes here. */
+  
+.form-style {
+    padding: 0 1rem;
+    margin-top: 2rem
+}
+
+.buttons-section {
+    text-align: center;
+    padding: 30px;
+}

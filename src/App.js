@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
 import '@tradeshift/tradeshift-ui';
+import './App.css'
+import Header from './components/Header'
+
+import SideForm from './components/SideForm'
 
 class App extends Component {
   render() {
     return (
-      <div>Nice stuff go in here.</div>
+      <div>
+        <Header />
+        <SideForm />
+      </div>
     );
   }
 }
