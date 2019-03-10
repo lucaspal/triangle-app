@@ -17,20 +17,20 @@ class SideForm extends Component {
     })
 
     onSide1Changed = (value) => {
-        this.setState({ side1: value, isError: this.isATriangle() })
+        this.setState({ side1: value, isError: !this.isATriangle() })
     }
 
     onSide2Changed = (value) => {
-        this.setState({ side2: value, isError: this.isATriangle() })
+        this.setState({ side2: value, isError: !this.isATriangle() })
     }
 
     onSide3Changed = (value) => {
-        this.setState({ side3: value, isError: this.isATriangle() })
+        this.setState({ side3: value, isError: !this.isATriangle() })
     }
 
     // Triangle inequality rule.
     isATriangle = () => {
-        return Boolean(this.state.side1 + this.state.side2 < this.state.side3);
+        return Boolean(this.state.side1 + this.state.side2 > this.state.side3);
     }
 
     getTriangleType = () => {
