@@ -3,8 +3,9 @@ Simple web application bootstrapped with [Create React App](https://github.com/f
 
 It makes use of UI components from the [Tradeshift UI](http://ui.tradeshift.com/) library (https://github.com/Tradeshift/tradeshift-ui).
 
-## Available Scripts
-The following scripts are available:
+## Usage
+To run this application please clone the repository with `git clone <repo_address>` or download it manually.
+After that run one of the following, it requires `npm` installed.
 
 ### `npm start`
 Runs the app in the development mode.<br>
@@ -52,7 +53,7 @@ triangle-app
         └── SideForm.test.js
 ```
 
-The `public` folder contains the `index.html`, entry point for this application. Furthermore, it contains the `manifest.json`, providing meta-data used from mobile.
+The `public` folder contains the `index.html`, entry point for this application. Furthermore, it contains the `manifest.json`, providing meta-data when the web app is installed on a user's mobile device or desktop.
 The `src` folder contains the source code of the application, including the tests, in the `tests` folder. The main component is the `App` component, top node of this app. Other components are inside the `components` folder.
 
 More information and considerations can be found in the relative subdirectories.
