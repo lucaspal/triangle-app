@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Side extends Component {
     onValueChanged = (event) => {
-        this.props.onValueChanged(event.target.valueAsNumber || "" );
+        this.props.onValueChanged(event.target.valueAsNumber || "");
     }
 
     render() {
