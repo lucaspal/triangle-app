@@ -52,4 +52,8 @@ triangle-app
         └── SideForm.test.js
 ```
 
+The `public` folder contains the `index.html`, entry point for this application. Furthermore, it contains the `manifest.json`, providing meta-data used from mobile.
+The `src` folder contains the source code of the application, including the tests, in the `tests` folder. The main component is the `App` component, top node of this app. Other components are inside the `components` folder.
+
+More information and considerations can be found in the relative subdirectories.
 
