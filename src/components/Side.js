@@ -3,7 +3,19 @@ import PropTypes from 'prop-types';
 
 class Side extends Component {
     onValueChanged = (event) => {
-        this.props.onValueChanged(event.target.valueAsNumber || "");
+        const parsedValue = this.inputValidator(event.target.value)
+        this.props.onValueChanged(parsedValue);
+    }
+
+    // Input validator is needed because an input of type number does not handle gracefully dashes.
+    inputValidator = (value) => {
+        value = value.replace('/^[\d+\]/', '');  
+        
+        if (parseFloat(value) !== 0 && !isNaN(parseFloat(value))) {
+            return parseFloat(value);
+        } else {
+            return "";
+        }
     }
 
     render() {
@@ -11,8 +23,8 @@ class Side extends Component {
             <div className="side">
                 <label className={this.props.isError ? "ts-error" : {}}>
                     <span>{this.props.label}</span>
-                    <input type="number"
-                        placeholder="Pick a number greater than 0"
+                    <input
+                        placeholder="Pick an integer number greater than 0"
                         value={this.props.value}
                         onChange={this.onValueChanged} />
                 </label>

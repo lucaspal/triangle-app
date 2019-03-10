@@ -6,7 +6,7 @@ class SideForm extends Component {
         side1: '',
         side2: '',
         side3: '',
-        isTriangle: true,
+        isError: true,
         isSubmitted: false,
     }
 
@@ -18,20 +18,24 @@ class SideForm extends Component {
     })
 
     onSide1Changed = (value) => {
-        this.setState({ side1: value, isTriangle: this.isTriangle(value, this.state.side2, this.state.side3), isSubmitted: false })
+        this.setState({ side1: value, isError: this.isError(value, this.state.side2, this.state.side3), isSubmitted: false })
     }
 
     onSide2Changed = (value) => {
-        this.setState({ side2: value, isTriangle: this.isTriangle(this.state.side1, value, this.state.side3), isSubmitted: false })
+        this.setState({ side2: value, isError: this.isError(this.state.side1, value, this.state.side3), isSubmitted: false })
     }
 
     onSide3Changed = (value) => {
-        this.setState({ side3: value, isTriangle: this.isTriangle(this.state.side1, this.state.side2, value), isSubmitted: false })
+        this.setState({ side3: value, isError: this.isError(this.state.side1, this.state.side2, value), isSubmitted: false })
     }
 
-    // Triangle inequality rule.
-    isTriangle = (len1, len2, len3) => {
-        return len1 + len2 > len3;
+    isError = (len1, len2, len3) => {
+        // Triangle inequality rule.
+        const inequalityRule = len1 + len2 > len3; 
+        // Do not consider as error empty if one or more sides are empty.
+        const hasEmptySides = len1 === "" || len2 === "" || len3 === "";
+
+        return inequalityRule || hasEmptySides;
     }
 
     getTriangleType = () => {
@@ -68,7 +72,7 @@ class SideForm extends Component {
     }
 
     isDisabled = () => {
-        return !this.state.isTriangle || this.state.isSubmitted 
+        return !this.state.isError || this.state.isSubmitted 
         || this.state.side1 === 0 || this.state.side2 === 0 || this.state.side3 === 0 // Is not possible to make a triangle with any of the sides 0
         || this.state.side1 === "" || this.state.side2 === "" || this.state.side3 === ""; // Disabled on any of the fields empty
     }
@@ -78,7 +82,7 @@ class SideForm extends Component {
             side1: '',
             side2: '',
             side3: '',
-            isTriangle: true,
+            isError: true,
             isSubmitted: false,
         })
     }
@@ -87,10 +91,10 @@ class SideForm extends Component {
         return (
             <form ref="sides-form" data-ts="Form" onSubmit={this.onFormSubmitted} className="form-style">
                 <fieldset>
-                    <Side id="side1" value={this.state.side1} label="Side 1" isError={!this.state.isTriangle} onValueChanged={this.onSide1Changed} />
-                    <Side id="side2" value={this.state.side2} label="Side 2" isError={!this.state.isTriangle} onValueChanged={this.onSide2Changed} />
-                    <Side id="side3" value={this.state.side3} label="Side 3" isError={!this.state.isTriangle} onValueChanged={this.onSide3Changed} />
-                    {!this.state.isTriangle && /* Shows error message  */
+                    <Side id="side1" value={this.state.side1} label="Side 1" isError={!this.state.isError} onValueChanged={this.onSide1Changed} />
+                    <Side id="side2" value={this.state.side2} label="Side 2" isError={!this.state.isError} onValueChanged={this.onSide2Changed} />
+                    <Side id="side3" value={this.state.side3} label="Side 3" isError={!this.state.isError} onValueChanged={this.onSide3Changed} />
+                    {!this.state.isError && /* Shows error message  */
                         <dl className="ts-errors">
                             <dt>It is not possible to have a triangle with these sides.</dt>
                             <dd>The sides sizes do not satisfy the triangle inequality rule.</dd>
